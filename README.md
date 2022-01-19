@@ -8,6 +8,7 @@
 - Fin: 08 junio 2022
 - Frecuencia de valoraciones: Semanal
 - [Drive](https://drive.google.com/drive/u/0/folders/1ahYT0eQwReRcAzEKR0uWRBEMbw8-O7nS)
+- [Requisitos Proyecto Final](https://docs.google.com/document/d/1RruKSBM-dos7c6YhIEBzD-Hr3zO3wMeAmuvhVvpDGQ0/edit)
 
 ## Contenido
 
