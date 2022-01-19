@@ -1,1 +1,0 @@
-{"title":"Maceta","price":200,"thumbnail":"","id":1}

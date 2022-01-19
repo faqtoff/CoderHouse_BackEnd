@@ -56,7 +56,7 @@ async function cargarArchivo () {
         title: 'Maceta',
         price: 200,
         thumbnail: '',
-        id: 1
+        id: 1222
     }
     try {
         console.log(`1 - ID: ${archivo.save(objeto)}`)
