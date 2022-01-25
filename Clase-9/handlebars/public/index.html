@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Header</h1>
+
+  <div id="contenedor">
+    <!-- Contenido Dinamico -->
+  </div>
+
+  <h1>Footer</h1>
+
+  <!-- incluir handlebars desde el CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+  <script>
+    // compila la plantilla
+    const template = Handlebars.compile('<h1>{{mensaje}}</h1>');
+    // genera el html
+    const html = template({ mensaje: 'coder' });
+    // inyecta el resultado en la vista
+    document.querySelector('#contenedor').innerHTML = html; 
+  </script>
+</body>
+</html>
