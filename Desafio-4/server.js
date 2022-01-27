@@ -10,10 +10,12 @@ const app = express();
 const routerProductos = express.Router();
 
 /*=========================== MIDDLEWARES  */
-app.use('/api/productos', routerProductos);
 app.use('/', express.static(__dirname + '/public'));
-
+app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use('/api/productos', routerProductos);
+
 
 app.use((req, resn, next) => {
     console.log(`Se ejecuta el Midd de personas, Time: ${Date.now()}`)
@@ -55,9 +57,9 @@ routerProductos.get('/', (req,res) => {
 
 routerProductos.post('/', (req,res) => {
     console.log(req.body)
-    const title = req.query.title 
-    const price = req.query.price
-    const thumbnail = req.query.thumbnail
+    const title = req.body.title 
+    const price = req.body.price
+    const thumbnail = req.body.thumbnail
     
     if(title && price && thumbnail){
         console.log({title, price, thumbnail})
