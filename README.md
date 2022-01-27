@@ -12,9 +12,10 @@
 
 ## Contenido
 
-### Clase 1 - Principios de programación Backend
-
 `node .\funciones.js`
+`"serve": "nodemon server.js",`
+
+### Clase 1 - Principios de programación Backend
 
 - [Video](https://drive.google.com/file/d/1L-s7UE9OQDhIohFc97-n5oX6tWqvQKY8/view)
 - [Presentacion](https://docs.google.com/presentation/d/17G5V4T_3D9Z8hFbwvZmHsZdoc6vF_kcqZhSR3WMUo3s/preview?slide=id.ga07de48094_3_0)
