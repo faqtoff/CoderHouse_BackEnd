@@ -54,6 +54,7 @@ routerProductos.get('/', (req,res) => {
 })
 
 routerProductos.post('/', (req,res) => {
+    console.log(req.body)
     const title = req.query.title 
     const price = req.query.price
     const thumbnail = req.query.thumbnail
