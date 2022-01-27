@@ -1,7 +1,7 @@
 /* =========================== MODULOS */
 const express = require('express');
 const {Router} = require('express');
-const Contenedor = require('../../modules/clases/contenedor');
+const Contenedor = require('../modules/clases/contenedor');
 
 /*=========================== ROUTERS  */
 const routerProductos = new Router();
@@ -15,7 +15,7 @@ routerProductos.use((req, res, next) => {
 })
 
 /* VARIABLES */
-const nombre = './archivos/productos.txt'
+const nombre = './src/data/productos.txt'
 const archivo = new Contenedor (nombre)
 archivo.leerContenido()
 archivo.actualizarId()
@@ -46,13 +46,11 @@ routerProductos.get('/', (req,res) => {
 })
 
 routerProductos.post('/', (req,res) => {
-    console.log(req.body)
     const title = req.body.title 
     const price = req.body.price
     const thumbnail = req.body.thumbnail
     
     if(title && price && thumbnail){
-        console.log({title, price, thumbnail})
         let data = {
             title: title, 
             price: price, 
@@ -63,7 +61,7 @@ routerProductos.post('/', (req,res) => {
             list ? res.status(200).send({msg: 'Archivo Guardado', data:list }) : res.status(404).send({error: 'Producto no encontrado'})
         }
         catch (error) {
-            res.status(200).send(error)
+            new Error (error)
         }
     }
     else {
