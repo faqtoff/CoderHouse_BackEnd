@@ -13,14 +13,14 @@
 
     <section>
         <h2>Agregar Productos</h2>
-        <form action="">
+        <form action="/api/productos" method="post">
             <fieldset>
                 <label for="title">Nombre</label>
-                <input type="text" name="title">
+                <input type="text" name="title" id="title">
                 <label for="price">Precio</label>
-                <input type="number" name="price">
+                <input type="number" name="price" id="price">
                 <label for="thumbnail">Imagen (URL)</label>
-                <input type="text" name="thumbnail">
+                <input type="text" name="thumbnail" id="thumbnail">
                 <button type="submit">Grabar</button>
             </fieldset>
         </form>
