@@ -3,21 +3,22 @@ const fs = require('fs');
 module.exports = class Contenedor {
     constructor(nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
+        this.lastId = 0
+        this.contenido = []
     }
     //crear metodo que reciba un objeto, lo guardo en un archivo y devuelvo el id asignado
     save(objeto) {
-        let contenido = fs.readFileSync(this.nombreArchivo, 'utf-8');
-        let objetos = JSON.parse(contenido);
-        objetos.push(JSON.stringify(objeto));
-        let id = Date.now()
-        fs.writeFileSync(this.nombreArchivo, objetos);
-        return id;
+        this.lastId += 1
+        objeto.id = parseInt(this.lastId)
+        this.contenido.push(objeto);
+        let newContent = JSON.stringify(this.contenido)
+        console.log(this.contenido)
+        fs.writeFileSync(this.nombreArchivo, newContent);
+        return objeto;
     }
     //crear metodo que reciba un id y devuelva el objeto correspondiente o null si no existe
     findById(id) {
-        let contenido = fs.readFileSync(this.nombreArchivo, 'utf-8');
-        let objetos = JSON.parse(contenido);
-        let objeto = objetos.find(obj => obj.id == id);
+        let objeto = this.contenido.find(obj => obj.id == id);
         return objeto;
     }
     //devolver un array con todos los objetos del archivo
@@ -48,5 +49,23 @@ module.exports = class Contenedor {
         console.log(index)
         const object = lista[index]
         return object
+    }
+    // Actualizar contador de id
+    actualizarId () {
+        const array = this.contenido.sort(function(a, b) {
+            return b.id - a.id;
+        })
+        this.lastId = parseInt(array[0].id)
+        console.log(array[0].id)
+        return
+    }
+    // Leer el contenido
+    leerContenido (){
+        let contenido = fs.readFileSync(this.nombreArchivo, 'utf-8');
+        this.contenido = JSON.parse(contenido)
+    }
+    // Actualizar el contenido
+    actualizarContenido (newCont){
+        fs.writeFileSync(this.nombreArchivo, newCont);
     }
 }
