@@ -11,39 +11,66 @@ const routerProductos = express.Router();
 
 /*=========================== MIDDLEWARES  */
 app.use('/api/productos', routerProductos);
+app.use('/', express.static(__dirname + '/public'));
 
-routerProductos.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use((req, resn, next) => {
+    console.log(`Se ejecuta el Midd de personas, Time: ${Date.now()}`)
+    next()
+})
+
+routerProductos.use(express.json())
+
+/* VARIABLES */
+const nombre = './archivos/productos.txt'
 /* ======================== RUTAS ======================== */
 
 routerProductos.get('/', (req,res) => {
-    try {
-        const nombre = 'productos.txt'
-        const archivo = new Contenedor (nombre)
-        const list = JSON.stringify(archivo.findAll())
-        res.status(200).send(list)
+    const id = req.query.id 
+    console.log(id)
+    if (id) {
+        try {
+            const archivo = new Contenedor (nombre)
+            const list = JSON.stringify(archivo.findById(`${id}`))
+            list ? res.status(200).send(list) : res.status(404).send({error: 'Producto no encontrado'})
+        }
+        catch {
+            res.status(200).send([])
+        }
     }
-    catch {
-        res.status(200).send([])
-    }
-})
-
-routerProductos.get('/:id', (req,res) => {
-    try {
-        const nombre = 'productos.txt'
-        const archivo = new Contenedor (nombre)
-        const list = JSON.stringify(archivo.findAll())
-        res.status(200).send(list)
-    }
-    catch {
-        res.status(200).send([])
+    else {
+        try {
+            const archivo = new Contenedor (nombre)
+            const list = JSON.stringify(archivo.findAll())
+            res.status(200).send(list)
+        }
+        catch {
+            res.status(200).send([])
+        }
     }
 })
 
 routerProductos.post('/', (req,res) => {
+    const id = req.query.id 
+    console.log(id)
+    if (id) {
+        try {
+            const archivo = new Contenedor (nombre)
+            const list = JSON.stringify(archivo.findById(`${id}`))
+            list ? res.status(200).send(list) : res.status(404).send({error: 'Producto no encontrado'})
+        }
+        catch {
+            res.status(200).send([])
+        }
+    }
+    else {
+        res.status(404).send({error: 'Producto no encontrado'})
+    }
+})
+
+routerProductos.put(':id', (req,res) => {
     try {
-        const nombre = 'archivos/productos.txt'
         const archivo = new Contenedor (nombre)
         res.status(200).send(archivo.getRandomArbitrary())
     }
@@ -52,25 +79,21 @@ routerProductos.post('/', (req,res) => {
     }
 })
 
-routerProductos.put('/:id', (req,res) => {
-    try {
-        const nombre = 'archivos/productos.txt'
-        const archivo = new Contenedor (nombre)
-        res.status(200).send(archivo.getRandomArbitrary())
+routerProductos.delete('/', (req,res) => {
+    const id = req.query.id 
+    console.log(id)
+    if (id) {
+        try {
+            const archivo = new Contenedor (nombre)
+            const list = JSON.stringify(archivo.delete(`${id}`))
+            list ? res.status(200).send({msg: 'Producto eliminado'}) : res.status(404).send({error: 'Producto no encontrado'})
+        }
+        catch {
+            res.status(500)
+        }
     }
-    catch {
-        res.status(200).send([])
-    }
-})
-
-routerProductos.delete('/:id', (req,res) => {
-    try {
-        const nombre = 'archivos/productos.txt'
-        const archivo = new Contenedor (nombre)
-        res.status(200).send(archivo.getRandomArbitrary())
-    }
-    catch {
-        res.status(200).send([])
+    else {
+        res.status(404).send({error: 'Producto no encontrado'})
     }
 })
 /* ======================== SERVER ======================== */

@@ -16,7 +16,7 @@ module.exports = class Contenedor {
     //crear metodo que reciba un id y devuelva el objeto correspondiente o null si no existe
     findById(id) {
         let contenido = fs.readFileSync(this.nombreArchivo, 'utf-8');
-        let objetos = [JSON.parse(contenido)];
+        let objetos = JSON.parse(contenido);
         let objeto = objetos.find(obj => obj.id == id);
         return objeto;
     }
@@ -34,6 +34,7 @@ module.exports = class Contenedor {
         let indice = objetos.indexOf(objeto);
         objetos.splice(indice, 1);
         fs.writeFileSync(this.nombreArchivo, JSON.stringify(objetos));
+        return true
     }
     //elimina todos los objetos del archivo
     deleteAll() {
