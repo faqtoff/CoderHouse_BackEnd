@@ -24,6 +24,9 @@ routerProductos.use(express.json())
 
 /* VARIABLES */
 const nombre = './archivos/productos.txt'
+const archivo = new Contenedor (nombre)
+archivo.leerContenido()
+archivo.actualizarId()
 /* ======================== RUTAS ======================== */
 
 routerProductos.get('/', (req,res) => {
@@ -31,7 +34,6 @@ routerProductos.get('/', (req,res) => {
     console.log(id)
     if (id) {
         try {
-            const archivo = new Contenedor (nombre)
             const list = JSON.stringify(archivo.findById(`${id}`))
             list ? res.status(200).send(list) : res.status(404).send({error: 'Producto no encontrado'})
         }
@@ -52,26 +54,32 @@ routerProductos.get('/', (req,res) => {
 })
 
 routerProductos.post('/', (req,res) => {
-    const id = req.query.id 
-    console.log(id)
-    if (id) {
-        try {
-            const archivo = new Contenedor (nombre)
-            const list = JSON.stringify(archivo.findById(`${id}`))
-            list ? res.status(200).send(list) : res.status(404).send({error: 'Producto no encontrado'})
+    const title = req.query.title 
+    const price = req.query.price
+    const thumbnail = req.query.thumbnail
+    
+    if(title && price && thumbnail){
+        console.log({title, price, thumbnail})
+        let data = {
+            title: title, 
+            price: price, 
+            thumbnail: thumbnail
         }
-        catch {
-            res.status(200).send([])
+        try {
+            const list = JSON.stringify(archivo.save(data))
+            list ? res.status(200).send({msg: 'Archivo Guardado', data:list }) : res.status(404).send({error: 'Producto no encontrado'})
+        }
+        catch (error) {
+            res.status(200).send(error)
         }
     }
     else {
-        res.status(404).send({error: 'Producto no encontrado'})
+        res.status(404).send('Bad request')
     }
 })
 
 routerProductos.put(':id', (req,res) => {
     try {
-        const archivo = new Contenedor (nombre)
         res.status(200).send(archivo.getRandomArbitrary())
     }
     catch {
@@ -84,7 +92,6 @@ routerProductos.delete('/', (req,res) => {
     console.log(id)
     if (id) {
         try {
-            const archivo = new Contenedor (nombre)
             const list = JSON.stringify(archivo.delete(`${id}`))
             list ? res.status(200).send({msg: 'Producto eliminado'}) : res.status(404).send({error: 'Producto no encontrado'})
         }
