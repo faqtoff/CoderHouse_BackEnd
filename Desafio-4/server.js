@@ -19,15 +19,10 @@ app.use((req, resn, next) => {
 })
 app.use('/api/productos', routerProductos);
 
-
-/* Error */
 app.use(function (err, req, res, next) {
     console.error( err)
     res.status(500).send('Something broke!')
 })
-
-
-/* ======================== RUTAS ======================== */
 
 /* ======================== SERVER ======================== */
 const PORT = 8080;
