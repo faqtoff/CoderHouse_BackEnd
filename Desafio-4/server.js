@@ -29,7 +29,19 @@ routerProductos.get('/', (req,res) => {
     }
 })
 
-routerProductos.get('/random', (req,res) => {
+routerProductos.get('/:id', (req,res) => {
+    try {
+        const nombre = 'productos.txt'
+        const archivo = new Contenedor (nombre)
+        const list = JSON.stringify(archivo.findAll())
+        res.status(200).send(list)
+    }
+    catch {
+        res.status(200).send([])
+    }
+})
+
+routerProductos.post('/', (req,res) => {
     try {
         const nombre = 'archivos/productos.txt'
         const archivo = new Contenedor (nombre)
@@ -40,6 +52,27 @@ routerProductos.get('/random', (req,res) => {
     }
 })
 
+routerProductos.put('/:id', (req,res) => {
+    try {
+        const nombre = 'archivos/productos.txt'
+        const archivo = new Contenedor (nombre)
+        res.status(200).send(archivo.getRandomArbitrary())
+    }
+    catch {
+        res.status(200).send([])
+    }
+})
+
+routerProductos.delete('/:id', (req,res) => {
+    try {
+        const nombre = 'archivos/productos.txt'
+        const archivo = new Contenedor (nombre)
+        res.status(200).send(archivo.getRandomArbitrary())
+    }
+    catch {
+        res.status(200).send([])
+    }
+})
 /* ======================== SERVER ======================== */
 const PORT = 8080;
 const server = app.listen(PORT, () => {
