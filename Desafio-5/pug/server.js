@@ -19,14 +19,13 @@ app.use((req, resn, next) => {
 
 app.use('/productos', routerProductos);
 
-
 app.use(function (err, req, res, next) {
     console.error( err)
     res.status(500).send('Something broke!')
 })
 /* ------------------------  Conf Motor  ------------------------------- */
-app.set('views', path.join(__dirname, 'src/views'));
-app.set('view engine', 'ejs');
+app.set('views', path.join('src/views'));
+app.set('view engine', 'pug');
 
 /* ------------------------ Servidor ------------------------------- */
 const PORT = 7272;

@@ -1,0 +1,22 @@
+html
+
+    head
+        title Productos
+        link(rel="stylesheet", href="/css/main.css")
+
+body(class="scroll--auto")
+
+    header
+        nav(class="navbar--faqstyle bg--primary")
+            div(class="navbar__brand")
+                h1(class="navbar__link mt--1")='Productos'
+            div(class="navbar__linkGroup")
+                a( href="/" class="navbar__link")='Inicio'
+                
+    main(  class="conteiner grid")
+        each product in list
+            div(class="card m-2")
+                img(src=`${product.thumbnail}`, alt="imagen_del_producto")
+                h3=product.title
+                p=`ID ${product.id}`
+                p=`$ ${product.price}`
