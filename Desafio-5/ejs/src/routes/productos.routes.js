@@ -39,14 +39,12 @@ routerProductos.get('/', (req,res) => {
     else {
         try {
             const archivo = new Contenedor (nombre)
-            const data = async () => await JSON.stringify(archivo.findAll())
+            const data = async () => await archivo.findAll()
             data().then( list => {
-                
-            console.log(typeof list)
-            console.log(list)
+                res.render('productos',{
+                    list : list
+                })
             })
-            res.status(200)
-            // res.render('productos', list)
         }
         catch {
             // res.status(200).render('productos')
@@ -66,8 +64,11 @@ routerProductos.post('/', (req,res) => {
             thumbnail: thumbnail
         }
         try {
-            const list = JSON.stringify(archivo.save(data))
-            list ? res.status(200).send({msg: 'Archivo Guardado', data:list }) : res.status(404).send({error: 'Producto no encontrado'})
+            JSON.stringify(archivo.save(data))
+            let list = archivo.findAll()
+            res.render('productos',{
+                list : list
+            })
         }
         catch (error) {
             new Error (error)
