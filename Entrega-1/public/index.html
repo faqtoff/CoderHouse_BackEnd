@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sala de chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h3>Chat :)</h3>
+    <form onsubmit="enviarMensaje()">
+        <input type="text" name="" id="nombre" placeholder="Nombre">
+        <input type="text" name="" id="mensaje" placeholder="Mensaje">
+
+        <button type="submit" value="enviar">Enviar</button>
+    </form>
+    <hr>
+    <div id="contenedor">
+        <!-- Contenido  -->
+        <span>
+            <b>Autor</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa expedita temporibus porro. Ut, consequuntur cum sint recusandae eum atque id possimus fugiat, rerum, aliquam mollitia placeat provident voluptates! Eius, libero!
+            <br>
+        </span>
+
+        <span>
+            <b>Autor</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa expedita temporibus porro. Ut, consequuntur cum sint recusandae eum atque id possimus fugiat, rerum, aliquam mollitia placeat provident voluptates! Eius, libero!
+            <br>
+        </span>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
