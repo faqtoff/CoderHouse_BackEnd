@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>Carga de Productos</title>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
-<body>
+<body class="scroll--auto">
     <header>
         <nav class="navbar--faqstyle bg--primary">
             <div class="navbar__brand">
@@ -20,8 +21,8 @@
     </header>
 
     <main class="conteiner">
-        <form class="form" action="/productos" method="post">
-            <fieldset class="form__fieldset">
+        <form class="form" id="formArticulo">
+            <fieldset class="form__fieldset col--span--2">
     
                 <div class="form__grupo">
                     <label class="form__label" for="title">Titulo</label>
@@ -44,6 +45,33 @@
             </fieldset>
         </form>
 
+        <div class="conteiner grid" id="contenedor">
+        </div>
+
+        
+        <h3>Chat :)</h3>
+        <form class="form" id="formMensaje">
+            <fieldset class="form__fieldset col--span--2">
+                <div class="form__grupo">
+                    <label class="form__label" for="email">Email*</label>
+                    <input class="form__grupo__input" type="email" name="email" id="email" placeholder="Email*" required>
+                </div>
+            </fieldset>
+            <div class="col--span--2">
+                <h3>Mensjaes:</h3>
+                <div class="p--1" id="mensajes">
+                </div>
+            </div>
+            <fieldset class="form__fieldset col--span--2">
+                <div class="form__grupo">
+                    <label class="form__label" for="mensaje">Mensaje</label>
+                    <input class="form__grupo__input" type="text" name="mensaje" id="mensaje" placeholder="Mensaje">
+                </div>
+                <button type="submit" value="enviar">Enviar</button>
+            </fieldset>
+        </form>
+
     </main>
+    <script src="/js/main.js"></script>
 </body>
 </html>

@@ -2,49 +2,36 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs')
-const path = require('path')
-const { Server: HttpServer } = require('http')
-const { Server: IOServer } = require('socket.io')
+const path = require('path');
+const routerProductos = require('./src/routes/productos.routes');
 /* ------------------------ Instancia de express ------------------------------- */
 const app = express();
-const httpServer = new HttpServer(app)
-const io = new IOServer (httpServer)
 
 /* ------------------------ Middlewares  ------------------------------- */
-app.use(express.static('public'));
+app.use('/', express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-/* ------------------------  Conf Motor  ------------------------------- */
-app.set('views', path.join('views'));
-app.set('view engine', '');
-
-/* ------------------------  Socket  ------------------------------- */
-const mensajes = [
-    {
-        autor: 'HHJHH', 
-        texto:'Salals'
-    }
-]
-
-io.on('connection', (socket) => {
-    console.log('Usuario Conectado!', socket.id)
-
-    /* Enviar historico de mensajes */
-    socket.emit('mensajes', mensajes)
-    /* Recivo */
-    socket.on('mensajeNuevo', data => {
-        mensajes.push()
-    })
-    /* Actualizo historico de mensajes */
-    socket.emit('mensajes', mensajes)
+app.use((req, resn, next) => {
+    console.log(`Se ejecuta el Midd de app, Time: ${Date.now()}`)
+    next()
 })
+
+app.use('/productos', routerProductos);
+
+
+app.use(function (err, req, res, next) {
+    console.error( err)
+    res.status(500).send('Something broke!')
+})
+/* ------------------------  Conf Motor  ------------------------------- */
+app.set('views', path.join(__dirname, 'src/views'));
+app.set('view engine', 'ejs');
 
 /* ------------------------ Servidor ------------------------------- */
-const PORT = 4334;
+const PORT = 7272;
 
-const server = httpServer.listen( PORT, () => {
-    console.info(`Servidor escuchando en el puerto ${PORT}`)
+const server = app.listen( PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`)
 })
-
 server.on("error", error => console.error(`Error en servidor ${error}`))

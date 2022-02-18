@@ -20,12 +20,7 @@ app.set('views', path.join('views'));
 app.set('view engine', '');
 
 /* ------------------------  Socket  ------------------------------- */
-const mensajes = [
-    {
-        autor: 'HHJHH', 
-        texto:'Salals'
-    }
-]
+const mensajes = []
 
 io.on('connection', (socket) => {
     console.log('Usuario Conectado!', socket.id)
@@ -34,10 +29,10 @@ io.on('connection', (socket) => {
     socket.emit('mensajes', mensajes)
     /* Recivo */
     socket.on('mensajeNuevo', data => {
-        mensajes.push()
+        mensajes.push(data)
+        /* Actualizo historico de mensajes */
+        io.sockets.emit('mensajes', mensajes)
     })
-    /* Actualizo historico de mensajes */
-    socket.emit('mensajes', mensajes)
 })
 
 /* ------------------------ Servidor ------------------------------- */

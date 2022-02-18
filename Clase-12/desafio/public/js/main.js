@@ -1,15 +1,15 @@
-const e = require("express")
-
 const socket = io.connect()
 
-const enviarMensaje = e => {
-    e.prevetDefault()
-    const autor = document.querySelector('#nombre').value
-    const texto = document.querySelector('#mensaje').value
+const formMensaje = document.querySelector('#formMensaje')
+formMensaje.addEventListener('submit', e => {
+    e.preventDefault()
+    const autor = document.querySelector('#nombre')
+    const texto = document.querySelector('#mensaje')
 
-    socket.emit('mensajeNuevo', {autor, texto})
-}
-
+    socket.emit('mensajeNuevo', {autor: autor.value, texto: texto.value})
+    autor.value = ''
+    texto.value = ''
+})
 socket.on('mensajes', mensajes => {
     console.log(mensajes)
 

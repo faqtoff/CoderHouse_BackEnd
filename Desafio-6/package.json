@@ -1,5 +1,5 @@
 {
-  "name": "node-express",
+  "name": "express_custom",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -11,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "express-handlebars": "^6.0.2",
+    "socket.io": "^4.4.1"
   }
 }
