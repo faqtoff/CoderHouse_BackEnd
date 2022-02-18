@@ -15,13 +15,12 @@ routerProductos.use((req, res, next) => {
     next()
 })
 
-/*===========================  Conf Motor */
-
 /* VARIABLES */
 const nombre = './src/data/productos.txt'
 const archivo = new Contenedor (nombre)
 archivo.leerContenido()
 archivo.actualizarId()
+
 /* =========================== RUTAS */
 
 routerProductos.get('/', (req,res) => {
@@ -32,7 +31,7 @@ routerProductos.get('/', (req,res) => {
             list ? res.status(200).render('productos', list).send(list) : res.status(404).send({error: 'Producto no encontrado'})
         }
         catch {
-            res.status(200).render('productos')
+            res.status(200).render('partials/productos')
             //res.status(200).send([])
         }
     }
@@ -41,7 +40,7 @@ routerProductos.get('/', (req,res) => {
             const archivo = new Contenedor (nombre)
             const data = async () => await archivo.findAll()
             data().then( list => {
-                res.render('productos',{
+                res.render('partials/productos',{
                     list : list
                 })
             })
@@ -66,7 +65,7 @@ routerProductos.post('/', (req,res) => {
         try {
             JSON.stringify(archivo.save(data))
             let list = archivo.findAll()
-            res.render('productos',{
+            res.render('partials/productos',{
                 list : list
             })
         }
