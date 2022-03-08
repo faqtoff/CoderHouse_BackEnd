@@ -1,0 +1,15 @@
+npm i @babel/cli @babel/cli @babel/node @babel/preset-env @babel/core
+
+Pendiente de un archivo
+"build": "babel ./origen.js -o ./destino.js -w"
+
+Realizar build
+"build": "babel src --out-dir dist"
+
+Ver codigo de forma activa
+"start": "npx babel src --watch --out-dir dist"
+
+
+"build": "npx babel src --watch --out-dir dist",
+"serve": "babel-node ./dist/main.js",
+"dev": "nodemon --exec npm run serve"
