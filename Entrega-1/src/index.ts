@@ -4,6 +4,7 @@ import bodyParser from'body-parser';
 import fs from 'fs';
 import path from 'path';
 import { routerProductos } from './routes/productos.routes';
+import { routerCarrito } from './routes/carrito.routes';
 /* ------------------------ Instancia de express ------------------------------- */
 const app = express();
 
@@ -13,23 +14,19 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use((req, resn, next) => {
-    console.log(`Se ejecuta el Midd de app, Time: ${Date.now()}`)
+    console.info(`Running App, Time: ${Date.now()}`)
     next()
 })
-
-app.use('/productos', routerProductos);
-
+app.use('/api/productos', routerProductos);
+app.use('/api/carrito', routerCarrito);
 
 app.use(function (err, req, res, next) {
-    console.error( err)
+    console.error(err)
     res.status(500).send('Something broke!')
 })
-/* ------------------------  Conf Motor  ------------------------------- */
-app.set('views', path.join(__dirname, 'src/views'));
-app.set('view engine', 'ejs');
 
 /* ------------------------ Servidor ------------------------------- */
-const PORT = 7272;
+const PORT = 8080;
 
 const server = app.listen( PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`)

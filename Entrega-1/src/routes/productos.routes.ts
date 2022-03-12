@@ -15,19 +15,16 @@ routerProductos.use((req, res, next) => {
     next()
 })
 
-/*===========================  Conf Motor */
-
 /* VARIABLES */
 const nombre = './src/data/productos.txt'
-const archivo = new Contenedor (nombre)
-archivo.leerContenido()
-archivo.actualizarId()
+const stockFile = new Contenedor (nombre)
+stockFile.leerContenido()
+stockFile.actualizarId()
 /* =========================== RUTAS */
 
 routerProductos.get('/', (req,res) => {
     try {
-        const archivo = new Contenedor (nombre)
-        const data = async () => await archivo.findAll()
+        const data = async () => await stockFile.findAll()
         data().then( list => {
             res.json(list)
         })
@@ -63,8 +60,8 @@ routerProductos.post('/', (req,res) => {
             thumbnail: thumbnail
         }
         try {
-            JSON.stringify(archivo.save(data))
-            let list = archivo.findAll()
+            JSON.stringify(stockFile.save(data))
+            let list = stockFile.findAll()
             res.render('productos',{
                 list : list
             })
@@ -83,7 +80,7 @@ routerProductos.put(':id', (req,res) => {
     console.log(id)
     if (id) {
         try {
-            const list = JSON.stringify(archivo.upload(`${id}`,req.query))
+            const list = JSON.stringify(stockFile.upload(`${id}`,req.query))
             list ? res.status(200).send(list) : res.status(404).send({error: 'Producto no encontrado'})
         }
         catch {
@@ -97,7 +94,7 @@ routerProductos.delete('/', (req,res) => {
     console.log(id)
     if (id) {
         try {
-            const list = JSON.stringify(archivo.delete(`${id}`))
+            const list = JSON.stringify(stockFile.delete(`${id}`))
             list ? res.status(200).send({msg: 'Producto eliminado'}) : res.status(404).send({error: 'Producto no encontrado'})
         }
         catch {

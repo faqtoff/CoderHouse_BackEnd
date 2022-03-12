@@ -68,11 +68,12 @@ module.exports = class Contenedor {
     }
     // Actualizar contador de id
     actualizarId () {
-        const array = this.contenido.sort(function(a, b) {
-            return b.id - a.id;
-        })
-        this.lastId = parseInt(array[0].id)
-        console.log(array[0].id)
+        if ( this.contenido.length > 0){
+            const array = this.contenido.sort(function(a, b) {
+                return b.id - a.id;
+            })
+            this.lastId = parseInt(array[0].id)
+        }
         return
     }
     // Leer el contenido

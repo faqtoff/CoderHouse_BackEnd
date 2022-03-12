@@ -1,4 +1,5 @@
 /* =========================== MODULOS */
+import { Carrito } from "../lib/carrito";
 const express = require('express');
 const {Router} = require('express');
 const path = require('path');
@@ -11,103 +12,41 @@ const routerCarrito = new Router();
 routerCarrito.use(express.urlencoded({extended: true}));
 routerCarrito.use(express.json())
 routerCarrito.use((req, res, next) => {
-    console.log(`Se ejecuta el Midd de Carrito, Time: ${Date.now()}`)
+    console.info(`Running Carrito, Time: ${Date.now()}`)
     next()
 })
 
 /*===========================  Conf Motor */
 
 /* VARIABLES */
-const nombre = './src/data/productos.txt'
-const archivo = new Contenedor (nombre)
-archivo.leerContenido()
-archivo.actualizarId()
+const nombre = './src/data/carritos.txt'
+const carritoFile = new Contenedor(nombre)
+carritoFile.leerContenido()
+carritoFile.actualizarId()
 /* =========================== RUTAS */
 
-routerCarrito.get('/', (req,res) => {
-    const id = req.query.id 
-    if (id) {
-        try {
-            const list = JSON.stringify(archivo.findById(`${id}`))
-            list ? res.status(200).render('productos', list).send(list) : res.status(404).send({error: 'Producto no encontrado'})
-        }
-        catch {
-            res.status(200).render('productos')
-            //res.status(200).send([])
-        }
-    }
-    else {
-        try {
-            const archivo = new Contenedor (nombre)
-            const data = async () => await archivo.findAll()
-            data().then( list => {
-                res.render('productos',{
-                    list : list
-                })
-            })
-        }
-        catch {
-            // res.status(200).render('productos')
-        }
-    }
-})
-
+// POST: '/' - Crea un carrito y devuelve su id.
 routerCarrito.post('/', (req,res) => {
-    const title = req.body.title 
-    const price = req.body.price
-    const thumbnail = req.body.thumbnail
-    
-    if(title && price && thumbnail){
-        let data = {
-            title: title, 
-            price: price, 
-            thumbnail: thumbnail
-        }
-        try {
-            JSON.stringify(archivo.save(data))
-            let list = archivo.findAll()
-            res.render('productos',{
-                list : list
-            })
-        }
-        catch (error: any) {
-            new Error (error)
-        }
-    }
-    else {
-        res.status(404).send('Bad request')
-    }
+    console.log(carritoFile)
+    const newCart = new Carrito()
+    res.status(200).json({
+        id: newCart.id,
+        message: `Nuevo carrito creado, ID: ${newCart.id}`
+    })
 })
 
-routerCarrito.put(':id', (req,res) => {
-    const id = req.query.id 
-    console.log(id)
-    if (id) {
-        try {
-            const list = JSON.stringify(archivo.upload(`${id}`,req.query))
-            list ? res.status(200).send(list) : res.status(404).send({error: 'Producto no encontrado'})
-        }
-        catch {
-            res.status(200).send([])
-        }
-    }
+// DELETE: '/:id' - Vacía un carrito y lo elimina.
+routerCarrito.delete('/:id', (req,res) => {
+    res.status(200).json({
+        message: `Nuevo carrito creado, ID: `
+    })
 })
 
-routerCarrito.delete('/', (req,res) => {
-    const id = req.query.id 
-    console.log(id)
-    if (id) {
-        try {
-            const list = JSON.stringify(archivo.delete(`${id}`))
-            list ? res.status(200).send({msg: 'Producto eliminado'}) : res.status(404).send({error: 'Producto no encontrado'})
-        }
-        catch {
-            res.status(500)
-        }
-    }
-    else {
-        res.status(404).send({error: 'Producto no encontrado'})
-    }
-})
+/* 
+b. DELETE: '/:id' - Vacía un carrito y lo elimina.
+c. GET: '/:id/productos' - Me permite listar todos los productos guardados en el carrito
+d. POST: '/:id/productos' - Para incorporar productos al carrito por su id de producto
+e. DELETE: '/:id/productos/:id_prod' - Eliminar un producto del carrito por su id de carrito y 
+de producto */
 
 export { routerCarrito }
