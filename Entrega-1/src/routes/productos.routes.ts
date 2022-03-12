@@ -2,7 +2,7 @@
 const express = require('express');
 const {Router} = require('express');
 const path = require('path');
-const Contenedor = require('../modules/clases/contenedor');
+const Contenedor = require('../lib/contenedor');
 
 /*=========================== ROUTERS  */
 const routerProductos = new Router();
@@ -25,30 +25,29 @@ archivo.actualizarId()
 /* =========================== RUTAS */
 
 routerProductos.get('/', (req,res) => {
-    const id = req.query.id 
-    if (id) {
-        try {
-            const list = JSON.stringify(archivo.findById(`${id}`))
-            list ? res.status(200).render('productos', list).send(list) : res.status(404).send({error: 'Producto no encontrado'})
-        }
-        catch {
-            res.status(200).render('productos')
-            //res.status(200).send([])
-        }
+    try {
+        const archivo = new Contenedor (nombre)
+        const data = async () => await archivo.findAll()
+        data().then( list => {
+            res.json(list)
+        })
     }
-    else {
-        try {
-            const archivo = new Contenedor (nombre)
-            const data = async () => await archivo.findAll()
-            data().then( list => {
-                res.render('productos',{
-                    list : list
-                })
-            })
-        }
-        catch {
-            // res.status(200).render('productos')
-        }
+    catch {
+        res.status(400)
+    }
+})
+
+routerProductos.get('/:id', (req,res) => {
+    const id = req.params.id
+    try {
+        const archivo = new Contenedor (nombre)
+        const data = async () => await archivo.findById(id)
+        data().then( list => {
+            res.json(list)
+        })
+    }
+    catch {
+        res.status(400)
     }
 })
 
@@ -70,7 +69,7 @@ routerProductos.post('/', (req,res) => {
                 list : list
             })
         }
-        catch (error) {
+        catch (error: any) {
             new Error (error)
         }
     }
@@ -110,4 +109,4 @@ routerProductos.delete('/', (req,res) => {
     }
 })
 
-module.exports = routerProductos;
+export {routerProductos}

@@ -1,9 +1,9 @@
 /* ------------------------ Modulos ------------------------------- */
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs')
-const path = require('path');
-const routerProductos = require('./src/routes/productos.routes');
+import express from 'express'
+import bodyParser from'body-parser';
+import fs from 'fs';
+import path from 'path';
+import { routerProductos } from './routes/productos.routes';
 /* ------------------------ Instancia de express ------------------------------- */
 const app = express();
 

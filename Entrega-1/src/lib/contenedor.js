@@ -32,7 +32,9 @@ module.exports = class Contenedor {
     }
     //crear metodo que reciba un id y devuelva el objeto correspondiente o null si no existe
     findById(id) {
-        let objeto = this.contenido.find(obj => obj.id == id);
+        let contenido = fs.readFileSync(this.nombreArchivo, 'utf-8');
+        let objetos = JSON.parse(contenido);
+        let objeto = objetos.find(obj => obj.id == `${id}`);
         return objeto;
     }
     //devolver un array con todos los objetos del archivo
