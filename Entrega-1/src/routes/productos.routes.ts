@@ -1,3 +1,6 @@
+import { ProductList } from "../lib/productLis";
+import { Producto } from "../lib/producto";
+
 /* =========================== MODULOS */
 const express = require('express');
 const {Router} = require('express');
@@ -17,65 +20,45 @@ routerProductos.use((req, res, next) => {
 
 /* VARIABLES */
 const nombre = './src/data/productos.txt'
-const stockFile = new Contenedor (nombre)
-stockFile.leerContenido()
-stockFile.actualizarId()
+const prodFile = new ProductList(nombre)
+prodFile.readDB()
 /* =========================== RUTAS */
 
 routerProductos.get('/', (req,res) => {
     try {
-        const data = async () => await stockFile.findAll()
+        const data = async () => await prodFile.contenido
         data().then( list => {
-            res.json(list)
+            res.status(200).json(list)
         })
     }
-    catch {
-        res.status(400)
+    catch (error) {
+        res.status(400).json(error)
     }
 })
 
 routerProductos.get('/:id', (req,res) => {
     const id = req.params.id
     try {
-        const archivo = new Contenedor (nombre)
-        const data = async () => await archivo.findById(id)
+        const data = async () => await prodFile.getById(id)
         data().then( list => {
-            res.json(list)
+            res.status(200).json(list)
         })
     }
-    catch {
-        res.status(400)
+    catch (error) {
+        res.status(400).json(error)
     }
 })
 
 routerProductos.post('/', (req,res) => {
-    const title = req.body.title 
-    const price = req.body.price
-    const thumbnail = req.body.thumbnail
-    
-    if(title && price && thumbnail){
-        let data = {
-            title: title, 
-            price: price, 
-            thumbnail: thumbnail
-        }
-        try {
-            JSON.stringify(stockFile.save(data))
-            let list = stockFile.findAll()
-            res.render('productos',{
-                list : list
-            })
-        }
-        catch (error: any) {
-            new Error (error)
-        }
+    try {
+        res.status(200).send(prodFile.newProduct(req.body))
     }
-    else {
+    catch (error: any) {
         res.status(404).send('Bad request')
     }
 })
 
-routerProductos.put(':id', (req,res) => {
+/* routerProductos.put('/:id', (req,res) => {
     const id = req.query.id 
     console.log(id)
     if (id) {
@@ -87,15 +70,13 @@ routerProductos.put(':id', (req,res) => {
             res.status(200).send([])
         }
     }
-})
+}) */
 
-routerProductos.delete('/', (req,res) => {
-    const id = req.query.id 
-    console.log(id)
+routerProductos.delete('/:id', (req,res) => {
+    const id = req.params.id 
     if (id) {
         try {
-            const list = JSON.stringify(stockFile.delete(`${id}`))
-            list ? res.status(200).send({msg: 'Producto eliminado'}) : res.status(404).send({error: 'Producto no encontrado'})
+            res.status(200).json(prodFile.delete(Number(id)))
         }
         catch {
             res.status(500)
