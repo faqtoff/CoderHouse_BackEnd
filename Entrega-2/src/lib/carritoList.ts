@@ -1,27 +1,29 @@
+import { Carrito } from "./carrito";
 import { Producto } from "./producto";
 const fs = require('fs');
 
-class ProductList {
+class CarritoList {
     nombreArchivo: string
     lastId: number
-    contenido: Producto []
+    contenido: Carrito []
     constructor(nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
         this.lastId = 0
         this.contenido = []
     }
-    getById(id: number):Producto {
-        return this.contenido.find(obj => obj.id == id) || new Producto({})
+    getById(id: number){
+        return this.contenido.find(obj => obj.id == id)
     }
     //crear metodo que reciba un objeto, lo guardo en un archivo y devuelvo el id asignado
-    newProduct(object) {
+    newCart() {
         const id = this.lastId += 1
         this.lastId = this.lastId
-        this.contenido.push(new Producto({id, ...object}))
+        const cart = new Carrito(id)
+        this.contenido.push(cart)
         
         let newContent = JSON.stringify(this.contenido)
         fs.writeFileSync(this.nombreArchivo, newContent);
-        return {id, message: `Nuevo producto creado con el ID: ${id}`};
+        return cart;
     }
     // Leer el contenido
     readDB(){
@@ -45,23 +47,24 @@ class ProductList {
             if ( indice != undefined ){ 
                 this.contenido.splice(indice, 1)
                 fs.writeFileSync(this.nombreArchivo, JSON.stringify(this.contenido));
-                return { message: `El producto ${id} se elimino correctamente` }
+                return { message: `El carrito ${id} se elimino correctamente` }
             }
-            else return { message: `El producto ${id} no existe` }
+            else return { message: `El carrito ${id} no existe` }
         }
         catch {
-            return new Error(`Error al eliminar producto`)
+            return new Error(`Error al eliminar archivo del carrito`)
         }
     }
-    // Update Product
-    updateProduct(id:number, object:Producto) {
-        this.delete(id)
-        this.contenido.push(new Producto(object))
-        
-        let newContent = JSON.stringify(this.contenido)
-        fs.writeFileSync(this.nombreArchivo, newContent);
-        return {id, message: `Producto ${id} actualizado`};
+    addProductToCartById(id: number, prod: Producto){
+        const cart:Carrito = this.contenido.find(obj => obj.id == id) || this.newCart()
+        cart.addProduct(prod)
+        return cart
     }
+    // Guarda el estado actual en la DB
+    refreshDB(){
+        fs.writeFileSync(this.nombreArchivo, this.contenido)
+    }
+    
 }
 
-export {ProductList}
+export {CarritoList}

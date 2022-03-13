@@ -1,0 +1,1 @@
+[{"id":1,"timestamp":1647133414433,"nombre":"Tets","descripcion":"string","código":"string","foto":"string","precio":20,"stock":1}]

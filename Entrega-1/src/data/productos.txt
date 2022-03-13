@@ -1,1 +1,1 @@
-[{"id":1,"timestamp":1647133414433,"nombre":"Tets","descripcion":"string","código":"string","foto":"string","precio":20,"stock":1}]
+[{"id":1,"timestamp":1647135601559,"nombre":"Test 1","descripcion":"ghhghg","código":"strghghhghging","foto":"hghhghg","precio":200,"stock":12}]

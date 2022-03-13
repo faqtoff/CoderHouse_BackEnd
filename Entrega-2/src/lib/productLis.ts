@@ -53,15 +53,6 @@ class ProductList {
             return new Error(`Error al eliminar producto`)
         }
     }
-    // Update Product
-    updateProduct(id:number, object:Producto) {
-        this.delete(id)
-        this.contenido.push(new Producto(object))
-        
-        let newContent = JSON.stringify(this.contenido)
-        fs.writeFileSync(this.nombreArchivo, newContent);
-        return {id, message: `Producto ${id} actualizado`};
-    }
 }
 
 export {ProductList}
