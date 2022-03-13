@@ -24,6 +24,7 @@ const prodFile = new ProductList(nombre)
 prodFile.readDB()
 /* =========================== RUTAS */
 
+// GET: '/:id?' - Me permite listar todos los productos disponibles ó un producto por su id (disponible para usuarios y administradores)
 routerProductos.get('/', (req,res) => {
     try {
         const data = async () => await prodFile.contenido
@@ -58,19 +59,21 @@ routerProductos.post('/', (req,res) => {
     }
 })
 
-/* routerProductos.put('/:id', (req,res) => {
-    const id = req.query.id 
-    console.log(id)
+routerProductos.put('/:id', (req,res) => {
+    const id = req.params.id 
+    const prod:Producto = req.body
     if (id) {
         try {
-            const list = JSON.stringify(stockFile.upload(`${id}`,req.query))
-            list ? res.status(200).send(list) : res.status(404).send({error: 'Producto no encontrado'})
+            res.status(200).json(prodFile.updateProduct(Number(id), prod))
         }
         catch {
-            res.status(200).send([])
+            res.status(500)
         }
     }
-}) */
+    else {
+        res.status(404).send({error: 'Producto no encontrado'})
+    }
+})
 
 routerProductos.delete('/:id', (req,res) => {
     const id = req.params.id 
