@@ -1,0 +1,66 @@
+1) Agregar 10 documentos con valores distintos a las colecciones mensajes y productos. El 
+formato de los documentos debe estar en correspondencia con el que venimos utilizando 
+en el entregable con base de datos MariaDB.
+
+show dbs
+mongod --dbpath "D:\Documentos\FaqToff_Dev\CoderHouse\CoderHouse_BackEnd\Desafio-8\db"
+use 'ecommerce'
+
+2) Definir las claves de los documentos en relación a los campos de las tablas de esa base. 
+En el caso de los productos, poner valores al campo precio entre los 100 y 5000 
+pesos(eligiendo valores intermedios, ej: 120, 580, 900, 1280, 1700, 2300, 2860, 3350, 
+4320, 4990). 
+
+db.createCollection('mensajes')
+db.createCollection('productos')
+show collections
+
+db.mensajes.insertMany([{mensaje: 'test', email: 'Celular@test.com', name:'test' , fecha:5}, {mensaje: 'HOLA', email: 'Zapatillas@test.com', name: 'test', fecha:5}, {mensaje: 'HOLA 2', email: 'Remera@test.com', name: 'test', fecha:5}, {mensaje: 'HOLA 3', email: 'Buzo@test.com', name: 'test', fecha:5}, 
+{mensaje: 'HOLA 4', email: 'Microondas@test.com', name: 'test', fecha:5}, {mensaje: 'HOLA 5', email: 'Manta@test.com', name: 'test', fecha:5}, {mensaje: 'HOLA 6', email: 'Yerba@test.com', name: 'test', fecha:5}, {mensaje: 'HOLA 7', email: 'ipad@test.com', name: 'test', fecha:5}, 
+{mensaje: 'HOLA 8', email: 'Auto@test.com', name: 'test', fecha:5}, {mensaje: 'HOLA 9', email: 'iphone@test.com', name: 'test', fecha:5}])
+
+db.productos.insertMany([{thumbnail: 'test', title: 'Celular', price: 120, stock:5}, {thumbnail: 'test', title: 'Zapatillas', price: 580, stock:5}, {thumbnail: 'test', title: 'Remera', price: 900, stock:5}, 
+{thumbnail: 'test', title: 'Buzo', price: 1280, stock:5}, {thumbnail: 'test', title: 'Microondas', price: 1700, stock:5}, {thumbnail: 'test', title: 'Manta', price: 2300, stock:5}, 
+{thumbnail: 'test', title: 'Yerba', price: 2860, stock:5}, {thumbnail: 'test', title: 'ipad', price: 3350, stock:5}, {thumbnail: 'test', title: 'Auto', price: 4320, stock:5}, 
+{thumbnail: 'test', title: 'iphone', price: 4990, stock:5}])
+
+3) Listar todos los documentos en cada colección.
+
+db.mensajes.find().pretty()
+db.productos.find().pretty()
+
+4) Mostrar la cantidad de documentos almacenados en cada una de ellas
+db.mensajes.estimatedDocumentCount()
+db.productos.estimatedDocumentCount()
+
+5) Realizar un CRUD sobre la colección de productos:
+
+    a) Agregar un producto más en la colección de productos
+    db.productos.insertOne({thumbnail: 'test', title: 'MacBook', price: 3569, stock:5})
+
+    b) Realizar una consulta por nombre de producto específico:
+
+        i) Listar los productos con precio menor a 1000 pesos.
+        db.productos.find({price: {$lt:1000}}).pretty()
+
+        ii) Listar los productos con precio entre los 1000 a 3000 pesos.
+        db.productos.find({$and:[{price:{$gte:1000}}, {price:{$lt:3000}}]}).pretty()
+
+        iii) Listar los productos con precio mayor a 3000 pesos.
+        db.productos.find({price: {$gte:3000}}).pretty()
+
+        iv) Realizar una consulta que traiga sólo el nombre del tercer producto más barato
+        db.productos.find().skip(2).limit(1).sort({price:1}).pretty()
+
+    c) Hacer una actualización sobre todos los productos, agregando el campo stock a 
+    todos ellos con un valor de 100.
+    db.productos.updateMany({}, {$set: {"stock":100}})
+
+    d) Cambiar el stock a cero de los productos con precios mayores a 4000 pesos. 
+    db.productos.updateMany({price:{$gte:4000}}, {$set: {"stock":0}})
+
+    e) Borrar los productos con precio menor a 1000 pesos 
+    db.productos.deleteMany({price: {$lt:1000}})
+
+6) Crear un usuario 'pepe' clave: 'asd456' que sólo pueda leer la base de datos ecommerce. 
+Verificar que pepe no pueda cambiar la información
