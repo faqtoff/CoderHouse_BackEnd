@@ -8,12 +8,33 @@ const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
 
 const routerProductos = require('./src/routes/productos.routes');
-const Contenedor = require('./src/modules/clases/contenedor');
+const { mariaDB } = require('./src/utils/mariaDB');
+const { sqLite } = require('./src/utils/SQLite');
+const { Products } = require('./src/models/productos.model');
+const { Messages } = require('./src/models/messages.model');
 /* ------------------------ Instancia de express ------------------------------- */
 const app = express();
 const httpServer = new HttpServer(app)
 const io = new IOServer (httpServer)
 
+/* DB articulos */
+
+let articulos = new Products(mariaDB)
+articulos.createTable()
+.then(() => {
+    return articulos.insert([
+        {
+            title:"Globo Terráqueo","price":345.67,
+            thumbnail:"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png"
+        },
+        {
+            title:"Escuadra",
+            price:123.45,
+            thumbnail:"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png"
+        }
+    ])
+})
+.finally(() => articulos.closeConection() )
 /* ------------------------ Middlewares  ------------------------------- */
 app.use('/', express.static(__dirname + '/public'));
 app.use(express.json());
@@ -32,7 +53,6 @@ app.use(function (err, req, res, next) {
 })
 /* ------------------------  Conf Motor  ------------------------------- */
 app.set('views', path.join(__dirname, 'src/views'));
-
 app.engine('hbs', exphbs.engine({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'),
@@ -41,49 +61,57 @@ app.engine('hbs', exphbs.engine({
 }))
 app.set('view engine', 'hbs');
 
-/* ------------------------ VARIABLES ------------------------ */
-const nombre = './src/data/productos.txt'
-const archivo = new Contenedor(nombre)
-archivo.leerContenido()
-archivo.actualizarId()
-
-const mensajes = []
-let listArticulos = []
-/* Articulos */
-try {
-    const archivo = new Contenedor (nombre)
-    const data = async () => await archivo.findAll()
-    data().then( list => {
-        listArticulos = list
-    })
-}
-catch (error) {
-    console.error(error)
-}
 /* ------------------------  Socket  ------------------------ */
 io.on('connection', (socket) => {
     console.log('Usuario Conectado!', socket.id)
-    /* Enviar historico de mensajes */
-    socket.emit('mensajes', mensajes)
-    /* Recivo */
+    /* DB messages */
+    let messages = new Messages(sqLite)
+    messages.createTable()
+    .then(() => {
+        return messages.list()
+    })
+    .then((message) => {
+        socket.emit('mensajes', message)
+    })
+    .finally(() => messages.closeConection() )
+    // Enviar historico de mensajes
+    // Recivo
     socket.on('mensajeNuevo', data => {
-        mensajes.push(data)
-        /* Actualizo historico de mensajes */
-        io.sockets.emit('mensajes', mensajes)
+        let messages = new Messages(sqLite)
+        return messages.insert(data)
+        .then(() => {
+            return messages.list()
+        })
+        .then((message) => {
+            socket.emit('mensajes', message)
+        })
+        .finally(() => articulos.closeConection() )
     })
 
+    let articulos = new Products(mariaDB)
+    articulos.list()
+    .then(listArticulos => {
+        socket.emit('articulos', listArticulos)
+    })
+    .finally(() => articulos.closeConection() )
 
-    socket.emit('articulos', listArticulos)
     socket.on('articuloNuevo', data => {
-        listArticulos.push(data)
-        /* Actualizo historico de mensajes */
-        io.sockets.emit('articulos', listArticulos)
+        let articulos = new Products(mariaDB)
+        return articulos.insert(data)
+        .then(() => {
+            return articulos.list()
+        })
+        .then(listArticulos => {
+            socket.emit('articulos', listArticulos)
+        })
+        .finally(() => articulos.closeConection() )
+        // Actualizo historico de mensajes 
     })
 
 })
 
 /* ------------------------ Servidor ------------------------------- */
-const PORT = 7272;
+const PORT = 8080;
 
 const server = httpServer.listen( PORT, () => {
     console.info(`Servidor escuchando en el puerto ${PORT}`)

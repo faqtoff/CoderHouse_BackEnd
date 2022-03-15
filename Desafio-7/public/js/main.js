@@ -1,7 +1,6 @@
 const socket = io.connect()
 
 socket.on('articulos', articulos => {
-    console.log(articulos)
     let contArticulos = ''
     articulos.forEach( articulo => {
         contArticulos += `
@@ -14,6 +13,7 @@ socket.on('articulos', articulos => {
     });
     document.querySelector('#contenedor').innerHTML = contArticulos
 })
+
 socket.on('mensajes', mensajes => {
     console.log(mensajes)
     let contMensajes = ''

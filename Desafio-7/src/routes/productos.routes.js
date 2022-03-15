@@ -2,7 +2,9 @@
 const express = require('express');
 const {Router} = require('express');
 const path = require('path');
+const { Products } = require('../models/productos.model');
 const Contenedor = require('../modules/clases/contenedor');
+const { mariaDB } = require('../utils/mariaDB');
 
 /*=========================== ROUTERS  */
 const routerProductos = new Router();
@@ -16,37 +18,42 @@ routerProductos.use((req, res, next) => {
 })
 
 /* VARIABLES */
-const nombre = './src/data/productos.txt'
-const archivo = new Contenedor (nombre)
-archivo.leerContenido()
-archivo.actualizarId()
+// const nombre = './src/data/productos.txt'
+const archivo = new Products(mariaDB)
 
 /* =========================== RUTAS */
 
 routerProductos.get('/', (req,res) => {
-    const id = req.query.id 
+    const id = Number(req.query.id )
     if (id) {
         try {
-            const list = JSON.stringify(archivo.findById(`${id}`))
-            list ? res.status(200).render('productos', list).send(list) : res.status(404).send({error: 'Producto no encontrado'})
+            archivo.findByID(id)
+            .then(rows => {
+                const list = JSON.stringify(rows)
+                console.log(list)
+                // res.status(200).render('partials/productos', list)
+            })
+            .finally(() => archivo.closeConection() )
+            .catch (error => {
+                throw new Error(error)
+            })
         }
-        catch {
-            res.status(200).render('partials/productos')
-            //res.status(200).send([])
+        catch (error) {
+            res.status(400).send(error)
         }
     }
     else {
         try {
-            const archivo = new Contenedor (nombre)
-            const data = async () => await archivo.findAll()
-            data().then( list => {
-                res.render('partials/productos',{
+            archivo.list()
+            .then( list => {
+                res.status(200).render('partials/productos', {
                     list : list
-                })
+                }) 
             })
+            .finally(() => archivo.closeConection() )
         }
-        catch {
-            // res.status(200).render('productos')
+        catch (error) {
+            res.status(400).send(error)
         }
     }
 })
@@ -63,11 +70,14 @@ routerProductos.post('/', (req,res) => {
             thumbnail: thumbnail
         }
         try {
-            JSON.stringify(archivo.save(data))
-            let list = archivo.findAll()
-            res.render('partials/productos',{
-                list : list
+            archivo.insert(data)
+            archivo.list()
+            .then( list => {
+                res.status(200).render('partials/productos', {
+                    list : list
+                }) 
             })
+            .finally(() => archivo.closeConection() )
         }
         catch (error) {
             new Error (error)
@@ -78,7 +88,7 @@ routerProductos.post('/', (req,res) => {
     }
 })
 
-routerProductos.put(':id', (req,res) => {
+/* routerProductos.put(':id', (req,res) => {
     const id = req.query.id 
     console.log(id)
     if (id) {
@@ -90,9 +100,9 @@ routerProductos.put(':id', (req,res) => {
             res.status(200).send([])
         }
     }
-})
+}) */
 
-routerProductos.delete('/', (req,res) => {
+/* routerProductos.delete('/', (req,res) => {
     const id = req.query.id 
     console.log(id)
     if (id) {
@@ -107,6 +117,6 @@ routerProductos.delete('/', (req,res) => {
     else {
         res.status(404).send({error: 'Producto no encontrado'})
     }
-})
+}) */
 
 module.exports = routerProductos;
