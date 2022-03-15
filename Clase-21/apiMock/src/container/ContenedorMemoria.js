@@ -1,0 +1,6 @@
+ class ContenedorMemoria {
+    constructor () {
+        super()
+    }
+    
+}
