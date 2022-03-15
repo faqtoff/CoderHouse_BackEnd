@@ -1,0 +1,26 @@
+[
+	{
+		"id" : 1,
+		"brand" : "BMW",
+		"model" : "X1",
+		"price" : 2500000
+	},
+	{
+		"id" : 2,
+		"brand" : "Citroen",
+		"model" : "3cv",
+		"price" : 100000
+	},
+	{
+		"id" : 3,
+		"brand" : "Toyota",
+		"model" : "Corolla",
+		"price" : 1000000
+	},
+	{
+		"id" : 4,
+		"brand" : "Toyota",
+		"model" : "sw4",
+		"price" : 2000000
+	}
+]
