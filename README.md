@@ -127,7 +127,7 @@
 - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-18)
 - [Desafio 8 - MONGODB](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-8)
 
-### Clase 19 - Mongoose
+### Clase 19 - Mongoose ((((((((((RE VER))))))))))
 
 - [Video]()
 - [Presentacion]()
