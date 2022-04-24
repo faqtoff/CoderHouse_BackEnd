@@ -140,8 +140,73 @@
 - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-20)
 - [Entrega 2 - Segunda entrega del Proyecto Final](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Entrega-2)
 
-### Clase 21 - Trabajo con datos: Mocks
+### Clase 21 - Trabajo con datos: Mocks ((((((((((RE VER))))))))))
 
 - [Video]()
 - [Presentacion]()
 - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-21)
+
+### Clase 22 - Trabajo con datos: Normalización
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-22)
+- [Desafio 9 - Mocks y normalización](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-9)
+
+### Clase 23 - Cookies, Sesiones, Storages - Parte 1
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-23)
+
+### Clase 24 - Cookies, Sesiones, Storages - Parte 2
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-24)
+- [Desafio 10 - LOG-IN POR FORMULARIO](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-10)
+
+### Clase 25 - Autorización y autenticación
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-25)
+
+### Clase 26 - Estrategias de autenticación con redes sociales
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-26)
+- [Desafio 11 - Inicio de sesión](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-11)
+
+### Clase 27 - Proceso principal del servidor
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-27)
+
+### Clase 28 - Global & Child process
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-28)
+- [Desafio 12 - Usando el objeto process](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-12)
+
+### Clase 29 - Clusters & Escalabilidad
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-29)
+
+### Clase 30 - PROXY & NGINX
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-30)
+- [Desafio 13 - Servidor con balance de carga](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-13)
+
+### Clase 31 - Logs, profiling & debug - Parte I
+
+- [Video]()
+- [Presentacion]()
+- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-31)
