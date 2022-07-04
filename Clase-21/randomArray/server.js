@@ -27,4 +27,5 @@ app.get('/test', ( req, res ) => {
     })
 })
 
-const server = app.listen( PORT, () => console.info(`Mock Server listening in port ${PORT}`) )
+const server = app.listen( PORT, () => console.info(`Mock Server listening in port ${server.address().port}`) )
+server.on("error", error => console.error(`Error en servidor ${error}`))

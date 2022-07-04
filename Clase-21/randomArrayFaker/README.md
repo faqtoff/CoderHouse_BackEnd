@@ -1,0 +1,13 @@
+# RandomArray MockApi con Faker
+
+### Clase 21 Desafio 2
+
+Reformar el ejercicio anterior utilizado Faker para generar los objetos con datos
+aleatorios en español.
+
+- A la ruta `/test` se le podrá pasar por query params la cantidad de objetos a
+  generar.
+- Ej: `/test?cant=30`.
+- De no pasarle ningún valor, producirá 10 objetos.
+- Incorporarle id a cada uno de los objetos generados en forma incremental,
+  empezando por 1.
