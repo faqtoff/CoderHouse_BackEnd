@@ -231,17 +231,18 @@ function print(objeto) {
     console.log(util.inspect(objeto,false,12,true))
 }
 
-const normalizeHolding = normalize(holding, originalData);
-console.log('normalizeHolding');
-print(normalizeHolding);
+const normalizedHolding = normalize(holding, originalData);
+console.log('normalizedHolding');
+print(normalizedHolding);
 
 
-const desnormalizeHolding = denormalize(holding, normalizeHolding);
-console.log('desnormalizeHolding');
-print(desnormalizeHolding);
+const desnormalizedHolding = denormalize(normalizedHolding, holding, normalizedHolding.entities);
+console.log('desnormalizedHolding');
+print(desnormalizedHolding);
 
 console.table({
   longitudOriginal: JSON.stringify(originalData).length,
-  longitudNormalizada: JSON.stringify(normalizeHolding).length,
-  longitudDesnormalizada: JSON.stringify(desnormalizeHolding).length
+  longitudNormalizada: JSON.stringify(normalizedHolding).length,
+  longitudDesnormalizada: JSON.stringify(desnormalizedHolding).length,
+  optimizacion: ((JSON.stringify(normalizedHolding).length*100)/JSON.stringify(originalData).length).toFixed(2) + '%'
 })
