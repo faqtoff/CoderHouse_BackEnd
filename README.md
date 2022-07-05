@@ -140,7 +140,7 @@
 - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-20)
 - [Entrega 2 - Segunda entrega del Proyecto Final](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Entrega-2)
 
-### Clase 21 - Trabajo con datos: Mocks ((((((((((RE VER))))))))))
+### Clase 21 - Trabajo con datos: Mocks
 
 - [Video]()
 - [Presentacion]()
