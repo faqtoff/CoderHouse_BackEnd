@@ -1,14 +1,12 @@
-# Normalizar JSON
+# Normalizar JSON con Redundancia
 
-### Clase 22 Desafio 1
+### Clase 22 Desafio 2
 
-- Normalizar la estructura del objeto en formato JSON empresa.json que describe el organigrama de una empresa. El gerente y el encargado figuran en el array de empleados de la empresa.
-- Imprimir por consola el objeto normalizado y la longitud del objeto original y del normalizado. Comparar los resultados.
-  - Nota: En adelante, utilizar la siguiente función `print` para imprimir el contenido de un
-    objeto:
-  ```
-   const util = require('util')
-   function print(objeto) {
-   console.log(util.inspect(objeto,false,12,true))
-   }
-  ```
+Dado el objeto en formato JSON holding.json que representa la información correspondiente a un grupo de empresas:
+
+1. Definir el esquema de normalización.
+2. Obtener el objeto normalizado e imprimirlo por consola.
+3. Desnormalizar el objeto obtenido en el punto anterior.
+4. Imprimir la longitud del objeto original, del normalizado y del desnormalizado
+5. Imprimir el porcentaje de compresión del proceso de normalización.
+   Comparar y analizar los resultados.

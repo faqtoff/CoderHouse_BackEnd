@@ -1,7 +1,4 @@
-import { normalize, denormalize, schema } from 'normalizr';
-import util from 'util';
-
-const originalData = {
+const holding = {
   id: "10000",
   empresas: [
     {
@@ -216,32 +213,3 @@ const originalData = {
     }      
   ]
 }
-
-const empleado = new schema.Entity('empleados');
-const empresa = new schema.Entity('empresa',{
-    gerente: empleado,
-    encargado: empleado,
-    empleados: [empleado]
-})
-const holding = new schema.Entity('holding',{
-  empresas: [empresa]
-})
-
-function print(objeto) {
-    console.log(util.inspect(objeto,false,12,true))
-}
-
-const normalizeHolding = normalize(holding, originalData);
-console.log('normalizeHolding');
-print(normalizeHolding);
-
-
-const desnormalizeHolding = denormalize(holding, normalizeHolding);
-console.log('desnormalizeHolding');
-print(desnormalizeHolding);
-
-console.table({
-  longitudOriginal: JSON.stringify(originalData).length,
-  longitudNormalizada: JSON.stringify(normalizeHolding).length,
-  longitudDesnormalizada: JSON.stringify(desnormalizeHolding).length
-})
