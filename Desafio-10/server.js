@@ -1,14 +1,16 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const exphbs = require("express-handlebars");
 const connectMongo = require("connect-mongo");
 
-const app = express();
 const mongoStore = connectMongo.create({
   mongoUrl: "mongodb+srv://cluster0.kixqh.mongodb.net/myFirstDatabase",
   ttl: 60,
 });
 
+/* ========================================================================= Middlewares  */
+const app = express();
 app.use(cookieParser("kjk5554ffhhtr656ccddd&R4558$s"));
 app.use(
   session({
@@ -18,7 +20,29 @@ app.use(
     saveUninitialized: false,
   })
 );
-
+/* =========================================================================  Conf Motor   */
+app.set("views", path.join(__dirname, "views"));
+app.engine(
+  "hbs",
+  exphbs.engine({
+    defaultLayout: "main",
+    layoutsDir: path.join(app.get("views"), "layouts"),
+    partialsDir: path.join(app.get("views"), "partials"),
+    extname: "hbs",
+  })
+);
+/* =========================================================================  Conf Motor   */
+/* 
+app.get('/datos', (req, res) => {
+    const datos = {
+        nombre: 'Juana',
+        apellido: 'Perez',
+        email: 'Juanaperez@gmail.com',
+        telefono: 3885478985
+    }
+    res.render('plantilla', datos)
+})
+*/
 app.get("/", (req, res) => {
   res.send("Servidor funcionando");
 });
