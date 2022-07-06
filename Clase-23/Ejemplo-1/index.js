@@ -20,6 +20,11 @@ app.get("/sentSignCookie", (req, res) => {
   const coockieValue = "55555";
   res.cookie(coockieName, coockieValue, { signed: true }).send("Nueva Cookie");
 });
+app.get("/sentCookieVolatil", (req, res) => {
+  const coockieName = "name";
+  const coockieValue = "55555";
+  res.cookie(coockieName, coockieValue, { signed: true }).send("Nueva Cookie");
+});
 
 app.get("/clr", (req, res) => {
   const coockieName = "name";
