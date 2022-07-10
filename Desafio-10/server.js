@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const connectMongo = require("connect-mongo");
+const path = require("path");
 
 const mongoStore = connectMongo.create({
   mongoUrl: "mongodb+srv://cluster0.kixqh.mongodb.net/myFirstDatabase",

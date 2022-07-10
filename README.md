@@ -48,71 +48,71 @@
   - [Video]()
   - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-7)
 
-### Clase 8 - Router & Multer
+- Clase 8 - Router & Multer
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-8)
-- [Desafio 4 - API RESTful]()
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-8)
+  - [Desafio 4 - API RESTful]()
 
-### Clase 9 - Motores de Plantillas
+- Clase 9 - Motores de Plantillas
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-9)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-9)
 
-### Clase 10 - Pug & Ejs
+- Clase 10 - Pug & Ejs
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-10)
-- [Desafio 5 - Motores de plantillas]()
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-10)
+  - [Desafio 5 - Motores de plantillas]()
 
-### Clase 11 - Websockets
+- Clase 11 - Websockets
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-11)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-11)
 
-### Clase 12 - Aplicación chat con Websocket
+- Clase 12 - Aplicación chat con Websocket
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-12)
-- [Desafio 6 - Websockets]()
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-12)
+  - [Desafio 6 - Websockets]()
 
-### Clase 13 - Node.js como herramienta de desarrollo
+- Clase 13 - Node.js como herramienta de desarrollo
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-13)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-13)
 
-### Clase 14 - Webpack: Module Bundler
+- Clase 14 - Webpack: Module Bundler
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-14)
-- [Entrega 1 - Primera entrega del Proyecto Final]()
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-14)
+  - [Entrega 1 - Primera entrega del Proyecto Final]()
 
-### Clase 15 - SQL
+- Clase 15 - SQL
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-15)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-15)
 
-### Clase 16 - SQL y Node.js
+- Clase 16 - SQL y Node.js
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-16)
-- [Desafio 7 - NUESTRA PRIMERA BASE DE DATOS](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Entrega-1)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-16)
+  - [Desafio 7 - NUESTRA PRIMERA BASE DE DATOS](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Entrega-1)
 
-### Clase 17 - MongoDB
+- Clase 17 - MongoDB
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-17)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-17)
 
-### Clase 18 - CRUD en MongoDB
+- Clase 18 - CRUD en MongoDB
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-18)
-- [Desafio 8 - MONGODB](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-8)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-18)
+  - [Desafio 8 - MONGODB](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Desafio-8)
 
-### Clase 19 - Mongoose ((((((((((RE VER))))))))))
+- Clase 19 - Mongoose ((((((((((RE VER))))))))))
 
-- [Video]()
-- [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-19)
+  - [Video]()
+  - [Clase](https://github.com/faqtoff/CoderHouse_BackEnd/tree/main/Clase-19)
 
 - Clase 20 - DbaaS & Firebase
 
